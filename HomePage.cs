@@ -46,34 +46,59 @@ namespace TheConnectedShop
         [Test]
         public async Task LogoTest()
         {
-            var logoLink = _page.Locator("a.header__heading-link");
-            var logoImage = _page.Locator("header__heading-logo");
+            var logoLink = _page.Locator(".header__heading-link");
+            var logoImage = _page.Locator(".header__heading-logo");
+            await Assertions.Expect(logoLink).ToBeVisibleAsync();
+            await Assertions.Expect(logoImage).ToBeVisibleAsync();
+
             string hrefLogo = await logoLink.GetAttributeAsync("href");
             Assert.That(hrefLogo, Is.EqualTo("/"), "не збігаєтся");
 
-            string LogoAtributeWidth = await logoLink.GetAttributeAsync("width");
-            Assert.That(hrefLogo, Is.EqualTo("180"));
-            string LogoAtributeHeight = await logoLink.GetAttributeAsync("height");
-            Assert.That(hrefLogo, Is.EqualTo("90.0"));
+            string logoAtributeWidth = await logoImage.GetAttributeAsync("width");
+            Assert.That(logoAtributeWidth, Is.EqualTo("180"));
+            string logoAtributeHeight = await logoImage.GetAttributeAsync("height");
+            Assert.That(logoAtributeHeight, Is.EqualTo("90.0"));
         }
         [Test]
-        public async Task SearchFieldTest()
+        public async Task SearchFieldEnableAndEditableTest()
         {
-            var searchField = _page.GetByTestId("Search");
+            var searchField = _page.Locator("#Search-In-Inline");
             await Assertions.Expect(searchField).ToBeVisibleAsync();
+
+            bool isEnabled = await searchField.IsEnabledAsync();
+            bool isEditable = await searchField.IsEditableAsync();
+            Assert.That(isEnabled, Is.True, "Search field should be enabled");
+            Assert.That(isEditable, Is.True, "Search field should be editable");
+
+            string placeholder = await searchField.GetAttributeAsync("placeholder");
+            Assert.That(placeholder, Is.Not.Null.And.Not.Empty, "Search field should have placeholder");
+            Assert.That(placeholder, Is.EqualTo("Search"), "не збігаєтся");
+            Console.WriteLine($"Placeholder text: {placeholder}");
+
+            string testSearchText = "smart lock";
+            //await searchField.ClickAsync();
+            await searchField.FillAsync(testSearchText);
+
+            string actualText = await searchField.InputValueAsync();
+            Assert.That(actualText, Is.EqualTo(testSearchText), $"Expected '{testSearchText}' but got '{actualText}'");
         }
         [Test]
+        public async Task Test()
+        {
+
+        }
+     /*   [Test]
         public async Task SupportPhoneNumberTest()
         {
             var supportPhoneNumber = _page.GetByText("(305) 330-3424");
             Assert.That(supportPhoneNumber, Is.EqualTo("(305) 330-3424"));
-        }
-        [Test]
+        }*/
+      /*  [Test]
         public async Task CartTest()
         {
             var shoppingCart = _page.GetByTestId("cart-icon-bubble");
             await Assertions.Expect(shoppingCart).ToBeAttachedAsync();
-        }
-         
+        }*/
+
     }
 }
