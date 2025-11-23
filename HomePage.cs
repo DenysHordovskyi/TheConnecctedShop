@@ -1,5 +1,6 @@
 using Microsoft.Playwright;
 using NUnit.Framework;
+using static Microsoft.Playwright.Assertions;
 
 
 namespace TheConnectedShop
@@ -83,24 +84,18 @@ namespace TheConnectedShop
             Assert.That(actualText, Is.EqualTo(testSearchText), $"Expected '{testSearchText}' but got '{actualText}'");
         }
 
-      /*  [Test]
-        public async Task Test()
-        {
-
-        }*/
-        [Test]
+       [Test]
         public async Task SupportPhoneNumberTest()
         {
-            var supportPhoneNumber = _page.GetByText("(305) 330-3424");
-            Assert.That(supportPhoneNumber, Is.EqualTo("(305) 330-3424"));
+            await Expect(_page.GetByRole(AriaRole.Link, new() { Name = "(305) 330-3424" }).First).ToBeVisibleAsync();           
         }
 
-      /*  [Test]
+        [Test]
         public async Task CartTest()
         {
-            var shoppingCart = _page.GetByTestId("cart-icon-bubble");
-            await Assertions.Expect(shoppingCart).ToBeAttachedAsync();
-        }*/
+            var shoppingCart = _page.Locator(".header__cart-inner");
+            await Expect(shoppingCart).ToBeVisibleAsync();
+        }
 
     }
 }
