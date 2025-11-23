@@ -82,17 +82,19 @@ namespace TheConnectedShop
             string actualText = await searchField.InputValueAsync();
             Assert.That(actualText, Is.EqualTo(testSearchText), $"Expected '{testSearchText}' but got '{actualText}'");
         }
-        [Test]
+
+      /*  [Test]
         public async Task Test()
         {
 
-        }
-     /*   [Test]
+        }*/
+        [Test]
         public async Task SupportPhoneNumberTest()
         {
             var supportPhoneNumber = _page.GetByText("(305) 330-3424");
             Assert.That(supportPhoneNumber, Is.EqualTo("(305) 330-3424"));
-        }*/
+        }
+
       /*  [Test]
         public async Task CartTest()
         {
