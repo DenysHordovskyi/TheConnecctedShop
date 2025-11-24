@@ -76,8 +76,7 @@ namespace TheConnectedShop
             Assert.That(placeholder, Is.EqualTo("Search"), "не збігаєтся");
             Console.WriteLine($"Placeholder text: {placeholder}");
 
-            string testSearchText = "smart lock";
-            //await searchField.ClickAsync();
+            string testSearchText = "smart lock";            
             await searchField.FillAsync(testSearchText);
 
             string actualText = await searchField.InputValueAsync();
@@ -97,5 +96,17 @@ namespace TheConnectedShop
             await Expect(shoppingCart).ToBeVisibleAsync();
         }
 
+        [Test]
+        public async Task SearchItemTest()
+        {
+            var searchField = _page.Locator("#Search-In-Inline");
+            await Expect(searchField).ToBeVisibleAsync();
+            await searchField.FillAsync("smart");
+
+            var searchItem = _page.Locator("price").First;
+            string firstItem = "Smart Door Lock Slim";
+            Assert.That(searchItem, Is.EqualTo(firstItem);
+
+        }
     }
 }
