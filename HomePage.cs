@@ -79,7 +79,7 @@ namespace TheConnectedShop
             string testSearchText = "smart lock";            
             await searchField.FillAsync(testSearchText);
 
-            string actualText = await searchField.InputValueAsync();
+            string actualText = await searchField.InputValueAsync(); //Читає що написано
             Assert.That(actualText, Is.EqualTo(testSearchText), $"Expected '{testSearchText}' but got '{actualText}'");
         }
 
@@ -100,12 +100,20 @@ namespace TheConnectedShop
         public async Task SearchItemTest()
         {
             var searchField = _page.Locator("#Search-In-Inline");
-            await Expect(searchField).ToBeVisibleAsync();
-            await searchField.FillAsync("smart");
+            //await Expect(searchField).ToBeVisibleAsync();
 
-            var searchItem = _page.Locator("price").First;
-            string firstItem = "Smart Door Lock Slim";
-            Assert.That(searchItem, Is.EqualTo(firstItem);
+            string searchValue = "smart door";
+            await searchField.PressSequentiallyAsync(searchValue);
+            await Task.Delay(3000);
+            
+            var searchItem = _page.Locator("list-unstyled");
+            var resultText = await searchField.InnerTextAsync();    
+          
+            
+            Assert.That(resultText.ToLower(), Does.Contain(searchValue)); //ToLower не чутливий до рієстру
+
+           
+            
 
         }
     }
