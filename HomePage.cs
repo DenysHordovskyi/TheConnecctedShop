@@ -100,19 +100,17 @@ namespace TheConnectedShop
         public async Task SearchItemTest()
         {
             var searchField = _page.Locator("#Search-In-Inline");
-            //await Expect(searchField).ToBeVisibleAsync();
-
+            await Expect(searchField).ToBeVisibleAsync();
             string searchValue = "smart door";
+
             await searchField.PressSequentiallyAsync(searchValue);
             await Task.Delay(3000);
             
-            var searchItem = _page.Locator("list-unstyled");
-            var resultText = await searchField.InnerTextAsync();    
+            var searchItem = _page.Locator(".predictive-search__item__info").First;
+            var resultText = await searchItem.InnerTextAsync();    
           
             
-            Assert.That(resultText.ToLower(), Does.Contain(searchValue)); //ToLower не чутливий до рієстру
-
-           
+            Assert.That(resultText.ToLower(), Does.Contain(searchValue)); //ToLower не чутливий до рієстру        
             
 
         }
