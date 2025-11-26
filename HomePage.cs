@@ -1,5 +1,6 @@
 using Microsoft.Playwright;
 using NUnit.Framework;
+using System.Buffers;
 using static Microsoft.Playwright.Assertions;
 
 
@@ -107,11 +108,35 @@ namespace TheConnectedShop
             await Task.Delay(3000);
             
             var searchItem = _page.Locator(".predictive-search__item__info").First;
-            var resultText = await searchItem.InnerTextAsync();    
+            var resultText = await searchItem.InnerTextAsync();    //Зчитує текст 
           
             
-            Assert.That(resultText.ToLower(), Does.Contain(searchValue)); //ToLower не чутливий до рієстру        
-            
+            Assert.That(resultText.ToLower(), Does.Contain(searchValue)); //ToLower не чутливий до рієстру                                                                          
+        }
+        [Test]
+        public async Task SearchUnknownItemTest()
+        {
+            var searchField = _page.Locator("#Search-In-Inline");
+            string searchUnknownValue = "qqqqq";
+            string textForWrongRuesalt = "Search for “qqqqq”";
+
+            await searchField.PressSequentiallyAsync(searchUnknownValue);
+            await Task.Delay(3000);
+
+            var searchItem = _page.Locator(".predictive-search__header").First;
+            var resultText = await searchItem.InnerTextAsync();
+
+            Assert.That(resultText, Does.Contain(textForWrongRuesalt));
+
+            await searchItem.ClickAsync();
+            string descriptionWrongResult = "No results found for “qqqqq”. Check the spelling or use a different word or phrase.";
+            var descriptionLoc = _page.Locator(".alert").First;
+            var descriptionResult = await descriptionLoc.InnerTextAsync(); 
+
+            Assert.That(descriptionWrongResult, Does.Contain(descriptionResult));
+
+
+
 
         }
     }
