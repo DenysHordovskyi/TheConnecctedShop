@@ -134,10 +134,32 @@ namespace TheConnectedShop
             var descriptionResult = await descriptionLoc.InnerTextAsync(); 
 
             Assert.That(descriptionWrongResult, Does.Contain(descriptionResult));
+        }
+        [Test]
+        public async Task SearchSuggestionsTest()
+        {
+            var searchField = _page.Locator("#Search-In-Inline");
+            string searchValue = "smart door";
 
+            await searchField.PressSequentiallyAsync(searchValue);
+            await Task.Delay(3000);
 
+            var suggestionLoc = _page.Locator(".predictive-search__heading").First;
+            string suggestionBlock = "Suggestions";
+            var blockName = await suggestionLoc.InnerTextAsync();
 
+            Assert.That(suggestionBlock, Does.Contain(blockName));
 
+            var firstSuggestionLoc = _page.Locator("predictive-search__item-heading").First;
+            string suggestionText = "smart door lock slim";
+            var suggestionResult = await firstSuggestionLoc.InnerTextAsync();
+
+            Assert.That(suggestionText, Does.Contain(suggestionResult));
+            
+            string searchResultPage = "https://theconnectedshop.com/search?q=smart+door+lock+slim&_pos=1&_psq=smart+door&_ss=e&_v=1.0";
+            string currentUrl = _page.Url;
+            
+            Assert.That(currentUrl, Is.EqualTo(searchResultPage));
         }
     }
 }
