@@ -1,6 +1,7 @@
 using Microsoft.Playwright;
 using NUnit.Framework;
 using System.Buffers;
+using System.Text.RegularExpressions;
 using static Microsoft.Playwright.Assertions;
 
 
@@ -77,17 +78,17 @@ namespace TheConnectedShop
             Assert.That(placeholder, Is.EqualTo("Search"), "не збігаєтся");
             Console.WriteLine($"Placeholder text: {placeholder}");
 
-            string testSearchText = "smart lock";            
+            string testSearchText = "smart lock";
             await searchField.FillAsync(testSearchText);
 
             string actualText = await searchField.InputValueAsync(); //Читає що написано
             Assert.That(actualText, Is.EqualTo(testSearchText), $"Expected '{testSearchText}' but got '{actualText}'");
         }
 
-       [Test]
+        [Test]
         public async Task SupportPhoneNumberTest()
         {
-            await Expect(_page.GetByRole(AriaRole.Link, new() { Name = "(305) 330-3424" }).First).ToBeVisibleAsync();           
+            await Expect(_page.GetByRole(AriaRole.Link, new() { Name = "(305) 330-3424" }).First).ToBeVisibleAsync();
         }
 
         [Test]
@@ -106,11 +107,11 @@ namespace TheConnectedShop
 
             await searchField.PressSequentiallyAsync(searchValue);
             await Task.Delay(3000);
-            
+
             var searchItem = _page.Locator(".predictive-search__item__info").First;
             var resultText = await searchItem.InnerTextAsync();    //Зчитує текст 
-          
-            
+
+
             Assert.That(resultText.ToLower(), Does.Contain(searchValue)); //ToLower не чутливий до рієстру                                                                          
         }
         [Test]
@@ -131,10 +132,38 @@ namespace TheConnectedShop
             await searchItem.ClickAsync();
             string descriptionWrongResult = "No results found for “qqqqq”. Check the spelling or use a different word or phrase.";
             var descriptionLoc = _page.Locator(".alert").First;
-            var descriptionResult = await descriptionLoc.InnerTextAsync(); 
+            var descriptionResult = await descriptionLoc.InnerTextAsync();
 
             Assert.That(descriptionWrongResult, Does.Contain(descriptionResult));
         }
+        /* [Test]
+         public async Task SearchSuggestionsTest()
+         {
+             var searchField = _page.Locator("#Search-In-Inline");
+             string searchValue = "smart door";
+
+             await searchField.PressSequentiallyAsync(searchValue);
+             await Task.Delay(3000);
+
+             var suggestionLoc = _page.Locator(".predictive-search__heading").First;
+             string suggestionBlock = "Suggestions";
+             var blockName = await suggestionLoc.InnerTextAsync();
+
+             Assert.That(suggestionBlock, Does.Contain(blockName));
+
+             var firstSuggestionLoc = _page.Locator(".predictive-search__item-heading").First;
+             string suggestionText = "smart door lock slim";
+             var suggestionResult = await firstSuggestionLoc.InnerTextAsync();
+
+             Assert.That(suggestionText, Does.Contain(suggestionResult));
+
+             awa
+
+             string searchResultPage = "https://theconnectedshop.com/search?q=smart+door+lock+slim&_pos=1&_psq=smart+door&_ss=e&_v=1.0";
+             string currentUrl = _page.Url;
+
+             Assert.That(currentUrl, Is.EqualTo(searchResultPage));
+         }*/
         [Test]
         public async Task SearchSuggestionsTest()
         {
@@ -142,24 +171,38 @@ namespace TheConnectedShop
             string searchValue = "smart door";
 
             await searchField.PressSequentiallyAsync(searchValue);
-            await Task.Delay(3000);
+
+
+            await _page.Locator(".predictive-search__heading").First.WaitForAsync(); //WaitForAsync очікування
 
             var suggestionLoc = _page.Locator(".predictive-search__heading").First;
-            string suggestionBlock = "Suggestions";
             var blockName = await suggestionLoc.InnerTextAsync();
-
-            Assert.That(suggestionBlock, Does.Contain(blockName));
+            string suggestionBlock = "Suggestions";
+            Assert.That(blockName, Does.Contain(suggestionBlock));
 
             var firstSuggestionLoc = _page.Locator(".predictive-search__item-heading").First;
-            string suggestionText = "smart door lock slim";
             var suggestionResult = await firstSuggestionLoc.InnerTextAsync();
+            string suggestionText = "smart door lock slim";
+            Assert.That(suggestionResult.ToLower(), Does.Contain(suggestionText));
 
-            Assert.That(suggestionText, Does.Contain(suggestionResult));
-            
-            string searchResultPage = "https://theconnectedshop.com/search?q=smart+door+lock+slim&_pos=1&_psq=smart+door&_ss=e&_v=1.0";
+
+
+            await firstSuggestionLoc.ClickAsync();
+
+
+            await _page.WaitForURLAsync(url => url.Contains("/search"));
+
             string currentUrl = _page.Url;
-            
-            Assert.That(currentUrl, Is.EqualTo(searchResultPage));
+            Assert.That(currentUrl, Does.Contain("smart+door"));
+
+            var countLoc = _page.Locator("#ProductCount");
+            var text = await countLoc.InnerTextAsync();
+
+            int count = int.Parse(Regex.Match(text, @"\d+").Value);
+
+            Assert.That(count, Is.GreaterThan(0));
         }
+       // string message = await email.EvaluateAsync<string>("el => el.validationMessage");
+       // Assert.That(message, Is.Not.Empty);
     }
 }
