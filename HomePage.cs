@@ -150,7 +150,7 @@ namespace TheConnectedShop
 
             Assert.That(suggestionBlock, Does.Contain(blockName));
 
-            var firstSuggestionLoc = _page.Locator("predictive-search__item-heading").First;
+            var firstSuggestionLoc = _page.Locator(".predictive-search__item-heading").First;
             string suggestionText = "smart door lock slim";
             var suggestionResult = await firstSuggestionLoc.InnerTextAsync();
 
