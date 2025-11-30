@@ -202,7 +202,31 @@ namespace TheConnectedShop
 
             Assert.That(count, Is.GreaterThan(0));
         }
-       // string message = await email.EvaluateAsync<string>("el => el.validationMessage");
-       // Assert.That(message, Is.Not.Empty);
+        // string message = await email.EvaluateAsync<string>("el => el.validationMessage");
+        // Assert.That(message, Is.Not.Empty);
+
+        [Test]
+        public async Task ContactTest()
+        {
+
+            var contactButtonLoc = _page.Locator("header").GetByRole(AriaRole.Link, new() { Name = "Contact", Exact = true });  //Exact = true Точне співпадіння
+            await Expect(contactButtonLoc).ToBeVisibleAsync();
+            await contactButtonLoc.ClickAsync();
+
+            var contactUsHeading = _page.GetByText("Contact Us").First;
+            var nameHeading = _page.GetByLabel("NAME");
+            var emailHeading = _page.GetByLabel("EMAIL").First;
+            var phoneNumberHeading = _page.GetByLabel("PHONE NUMBER");
+            var commentHeading = _page.GetByLabel("COMMENT");
+
+            await Expect(contactUsHeading).ToBeVisibleAsync();
+            await Expect(nameHeading).ToBeVisibleAsync();
+            await Expect(emailHeading).ToBeVisibleAsync();
+            await Expect(phoneNumberHeading).ToBeVisibleAsync();
+            await Expect(commentHeading).ToBeVisibleAsync();
+            
+
+
+        }
     }
 }
