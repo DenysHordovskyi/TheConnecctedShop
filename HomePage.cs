@@ -223,7 +223,7 @@ namespace TheConnectedShop
             await Expect(nameHeading).ToBeVisibleAsync();
             await Expect(emailHeading).ToBeVisibleAsync();
             await Expect(phoneNumberHeading).ToBeVisibleAsync();
-            await Expect(commentHeading).ToBeVisibleAsync();
+            await Expect(commentHeading).ToBeVisibleAsync(); //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
             
 
 
