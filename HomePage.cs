@@ -205,6 +205,12 @@ namespace TheConnectedShop
         // string message = await email.EvaluateAsync<string>("el => el.validationMessage");
         // Assert.That(message, Is.Not.Empty);
 
+    private const string ContactButtonName = "Contact";
+    private const string ContactUsText = "Contact Us"; 
+    private const string NameLabel = "NAME";
+    private const string EmailLabel = "EMAIL";
+    private const string PhoneLabel = "PHONE NUMBER";
+    private const string CommentLabel = "COMMENT";
         [Test]
         public async Task ContactTest()
         {
@@ -223,7 +229,9 @@ namespace TheConnectedShop
             await Expect(nameHeading).ToBeVisibleAsync();
             await Expect(emailHeading).ToBeVisibleAsync();
             await Expect(phoneNumberHeading).ToBeVisibleAsync();
-            await Expect(commentHeading).ToBeVisibleAsync(); //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            await Expect(commentHeading).ToBeVisibleAsync();
+
+
             
 
 
