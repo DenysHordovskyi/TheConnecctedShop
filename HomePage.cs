@@ -231,6 +231,12 @@ namespace TheConnectedShop
             await Expect(phoneNumberHeading).ToBeVisibleAsync();
             await Expect(commentHeading).ToBeVisibleAsync();
 
+            var sendButtonLoc = _page.GetByRole(AriaRole.Button, new() {Name = "Send"});
+            await Expect(sendButtonLoc).ToBeVisibleAsync();
+            await Expect(sendButtonLoc).ToBeEnabledAsync();   //Перевірка доступності. Можно нажати, реагует, не заблокований
+            await sendButtonLoc.HoverAsync(); // імітує наведення курсору
+
+
 
             
 
