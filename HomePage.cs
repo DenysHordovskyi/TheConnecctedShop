@@ -234,13 +234,12 @@ namespace TheConnectedShop
             var sendButtonLoc = _page.GetByRole(AriaRole.Button, new() {Name = "Send"});
             await Expect(sendButtonLoc).ToBeVisibleAsync();
             await Expect(sendButtonLoc).ToBeEnabledAsync();   //Перевірка доступності. Можно нажати, реагует, не заблокований
-            await sendButtonLoc.HoverAsync(); // імітує наведення курсору
-
-
-
-            
+            await sendButtonLoc.HoverAsync(); // імітує наведення курсору          
 
 
         }
-    }
+     //  var isLogoVisible = await _homePage.Header.IsLogoVisible();
+     //  Assert.That(isLogoVisible, Is.True, "Logo should be visible");
+ }
+
 }

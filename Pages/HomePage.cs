@@ -17,10 +17,5 @@ namespace TheConnectedShop.Pages
  
         public async Task<string> GetTitle() => await Page.TitleAsync();
         public string GetUrl() => Page.Url;
- 
-      
-        public ILocator LogoLink => Page.Locator(".header__heading-link");
-        public ILocator LogoImg => Page.Locator(".header__heading-logo");
-        public ILocator SearchField => Page.Locator("#Search-In-Inline");
     }
 }
