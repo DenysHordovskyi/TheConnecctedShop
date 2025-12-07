@@ -9,28 +9,16 @@ namespace TheConnectedShop.Components
 
     {
         private ILocator LogoLink => Page.Locator(".header__heading-link");
-
         private ILocator LogoImage => Page.Locator(".header__heading-logo");
-
         private ILocator PhoneNumberLink => Page.GetByRole(AriaRole.Link, new() { Name = "(305) 330-3424" }).First;
-
         private ILocator ShoppingCart => Page.Locator(".header__cart-inner");
-
         private ILocator ContactButton => Page.Locator("header").GetByRole(AriaRole.Link, new() { Name = "Contact", Exact = true });
-
         private ILocator SearchField => Page.Locator("#Search-In-Inline");
-
         private ILocator NavigationMenu => Page.Locator(".header__inline-menu");
-
         private ILocator MainMenuItems => Page.Locator(".header__menu-item");
-
         private ILocator CartIcon => Page.Locator(".header__icon--cart");
-
         private ILocator CartCount => Page.Locator(".cart-count-bubble");
-
-
-        private ILocator AccountIcon => Page.Locator(".header__icon--account");
- 
+        private ILocator AccountIcon => Page.Locator(".header__icon--account"); 
         public HeaderComponent(IPage page) : base(page) { }
  
         public async Task<bool> IsLogoVisible()
@@ -77,9 +65,7 @@ namespace TheConnectedShop.Components
 
         {
             await PhoneNumberLink.ClickAsync();
-        }
- 
-        
+        }        
 
         public async Task<bool> IsCartVisible()
 
@@ -100,53 +86,35 @@ namespace TheConnectedShop.Components
         public async Task<bool> IsCartIconVisible()
 
         {
-
             return await CartIcon.IsVisibleAsync();
-
         }
  
         public async Task<int> GetCartItemCount()
 
         {
-
             if (await CartCount.IsVisibleAsync())
 
             {
-
                 var countText = await CartCount.TextContentAsync();
-
                 if (int.TryParse(countText, out int count))
-
                 {
-
                     return count;
-
                 }
-
             }
-
             return 0;
-
-        }
- 
-     
+        }     
 
         public async Task ClickContactButton()
 
         {
-
             await ContactButton.ClickAsync();
-
             await WaitForPageLoad();
-
         }
  
         public async Task<bool> IsContactButtonVisible()
 
         {
-
             return await ContactButton.IsVisibleAsync();
-
         }
  
        
@@ -154,51 +122,38 @@ namespace TheConnectedShop.Components
         public async Task<bool> IsSearchFieldVisible()
 
         {
-
             return await SearchField.IsVisibleAsync();
-
         }
  
         public async Task SetSearchText(string text)
 
         {
-
             await SearchField.FillAsync(text);
-
         }
  
         public async Task TypeSearchText(string text)
 
         {
-
             await SearchField.PressSequentiallyAsync(text);
-
         }
  
         public async Task<string> GetSearchText()
 
         {
-
             return await SearchField.InputValueAsync();
-
         }
  
         public async Task ClearSearchField()
 
         {
-
             await SearchField.ClearAsync();
-
         }
  
         public async Task SubmitSearch()
 
         {
-
             await SearchField.PressAsync("Enter");
-
             await WaitForPageLoad();
-
         }
  
         
@@ -206,37 +161,23 @@ namespace TheConnectedShop.Components
         public async Task<bool> IsNavigationMenuVisible()
 
         {
-
             return await NavigationMenu.IsVisibleAsync();
-
         }
  
         public async Task<List<string>> GetMenuItemsText()
 
         {
-
             var items = new List<string>();
-
             var count = await MainMenuItems.CountAsync();
-
             for (int i = 0; i < count; i++)
-
             {
-
                 var text = await MainMenuItems.Nth(i).TextContentAsync();
-
                 if (!string.IsNullOrEmpty(text))
-
                 {
-
                     items.Add(text.Trim());
-
                 }
-
             }
-
             return items;
-
         }
  
         public async Task ClickMenuItemByText(string menuText)
