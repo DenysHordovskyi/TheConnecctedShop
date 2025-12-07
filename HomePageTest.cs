@@ -7,7 +7,7 @@ using static Microsoft.Playwright.Assertions;
 
 namespace TheConnectedShop
 {
-    public class HomePage
+    public class HomePageTest
     {
         private IPlaywright _playwright;
         private IBrowser _browser;
@@ -16,7 +16,7 @@ namespace TheConnectedShop
         private const string ExpectedTitle = "The Connected Shop - Smart Locks, Smart Sensors, Smart Home & Office";
 
         [SetUp]
-        public async Task Setup()
+        public async Task SetupTest()
         {
             _playwright = await Playwright.CreateAsync();
             _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
@@ -211,6 +211,12 @@ namespace TheConnectedShop
     private const string EmailLabel = "EMAIL";
     private const string PhoneLabel = "PHONE NUMBER";
     private const string CommentLabel = "COMMENT";
+
+        public HomePage(IPage page)
+        {
+            _page = page;
+        }
+
         [Test]
         public async Task ContactTest()
         {
