@@ -183,61 +183,36 @@ namespace TheConnectedShop.Components
         public async Task ClickMenuItemByText(string menuText)
 
         {
-
             var menuItem = Page.GetByRole(AriaRole.Link, new() { Name = menuText, Exact = true });
 
             if (await menuItem.IsVisibleAsync())
-
             {
-
                 await menuItem.ClickAsync();
-
                 await WaitForPageLoad();
-
             }
-
         }
  
         public async Task ClickMenuItemByIndex(int index)
-
         {
-
             if (await MainMenuItems.Nth(index).IsVisibleAsync())
-
             {
-
                 await MainMenuItems.Nth(index).ClickAsync();
-
                 await WaitForPageLoad();
-
             }
-
-        }
- 
-      
+        }      
 
         public async Task<bool> IsAccountIconVisible()
-
         {
-
             return await AccountIcon.IsVisibleAsync();
-
         }
  
         public async Task ClickAccountIcon()
-
         {
-
             if (await IsAccountIconVisible())
-
             {
-
                 await AccountIcon.ClickAsync();
-
                 await WaitForPageLoad();
-
             }
-
         }
  
        
@@ -245,34 +220,23 @@ namespace TheConnectedShop.Components
         public async Task<bool> IsHeaderVisible()
 
         {
-
             return await LogoLink.IsVisibleAsync() && 
 
                    await NavigationMenu.IsVisibleAsync() &&
 
                    await SearchField.IsVisibleAsync();
-
         }
  
         
 
         public async Task OpenMobileMenu()
-
         {
-
             var mobileMenuButton = Page.Locator(".header__icon--menu");
-
             if (await mobileMenuButton.IsVisibleAsync())
-
             {
-
                 await mobileMenuButton.ClickAsync();
-
             }
-
         }
-
     }
-
 }
  
