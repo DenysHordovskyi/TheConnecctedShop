@@ -222,26 +222,8 @@ namespace TheConnectedShop
             var contactButtonLoc = _page.Locator("header").GetByRole(AriaRole.Link, new() { Name = "Contact", Exact = true });  //Exact = true Точне співпадіння
             await Expect(contactButtonLoc).ToBeVisibleAsync();
             await contactButtonLoc.ClickAsync();
-
-            var contactUsHeading = _page.GetByText("Contact Us").First;
-            var nameHeading = _page.GetByLabel("NAME");
-            var emailHeading = _page.GetByLabel("EMAIL").First;
-            var phoneNumberHeading = _page.GetByLabel("PHONE NUMBER");
-            var commentHeading = _page.GetByLabel("COMMENT");
-
-            await Expect(contactUsHeading).ToBeVisibleAsync();
-            await Expect(nameHeading).ToBeVisibleAsync();
-            await Expect(emailHeading).ToBeVisibleAsync();
-            await Expect(phoneNumberHeading).ToBeVisibleAsync();
-            await Expect(commentHeading).ToBeVisibleAsync();
-
-            var sendButtonLoc = _page.GetByRole(AriaRole.Button, new() {Name = "Send"});
-            await Expect(sendButtonLoc).ToBeVisibleAsync();
-            await Expect(sendButtonLoc).ToBeEnabledAsync();   //Перевірка доступності. Можно нажати, реагует, не заблокований
-            await sendButtonLoc.HoverAsync(); // імітує наведення курсору          
-
-
-        }
+           
+         }
      //  var isLogoVisible = await _homePage.Header.IsLogoVisible();
      //  Assert.That(isLogoVisible, Is.True, "Logo should be visible");
  }

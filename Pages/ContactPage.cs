@@ -39,17 +39,21 @@ namespace TheConnectedShop.Pages
             return await SendButton.IsVisibleAsync();
         }
  
-        public async Task<bool> IsSendButtonEnabled()
+        public async Task<bool> IsSendButtonEnabled() //????????? ???????????. ????? ??????, ??????, ?? ????????????
 
         {
             return await SendButton.IsEnabledAsync();
         }
  
-        public async Task HoverSendButton()
+        public async Task HoverSendButton() // ?????? ????????? ???????
 
         {
             await SendButton.HoverAsync();
         }      
+        public async Task ExpectedSendButtonBackgroundColor(string expectedRgb)
+        {
+            await Assertions.Expect(SendButton).ToHaveCSSAsync("background-color", expectedRgb);
+        }
 
         public async Task FillContactForm(string name, string email, string phone, string comment)
 
