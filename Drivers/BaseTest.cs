@@ -11,7 +11,7 @@ namespace TheConnectedShop.Drivers
         protected IPage Page;
  
         [SetUp]
-        public async Task Setup()
+        public virtual async Task Setup()
         {
             (Playwright, Browser, Page) = await PlaywrightDriver.InitBrowser();
         }

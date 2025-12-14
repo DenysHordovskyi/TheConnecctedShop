@@ -12,10 +12,15 @@ namespace TheConnectedShop.Pages
         private ILocator EmailField => Page.GetByLabel("EMAIL").First;
         private ILocator PhoneField => Page.GetByLabel("PHONE NUMBER");
         private ILocator CommentField => Page.GetByLabel("COMMENT");
-        private ILocator SendButton => Page.GetByRole(AriaRole.Button, new() { Name = "Send" });
+        private ILocator SendButton => Page.Locator("button[type='submit'].button:has(span:text('Send'))").First;        
+        private ILocator ContactLink => Page.Locator("a.header__menu-item[href='/pages/contact-us']");
         public ContactPage(IPage page) : base(page) { }
  
         // Validation methods
+        public async Task ClickContactButton()
+        {
+            await ContactLink.ClickAsync();
+        }        
 
         public async Task<bool> IsContactUsHeadingVisible()
 

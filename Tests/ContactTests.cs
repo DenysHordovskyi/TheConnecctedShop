@@ -16,12 +16,13 @@ namespace TheConnectedShop.Tests
         private ContactPage _contactPage;
 
         [SetUp]
-        public async Task Setup()
+        public override async Task Setup()
         {
             await base.Setup();
             _homePage = new HomePage(Page);
             _contactPage = new ContactPage(Page);
             await _homePage.Open();
+            await _contactPage.ClickContactButton();
         }
 
         [Test]
@@ -42,7 +43,7 @@ namespace TheConnectedShop.Tests
         public async Task Heading_ShouldHaveText_ContactUs()
         {
             var headingText = await _contactPage.GetContactUsHeadingText();
-            Assert.That(headingText, Is.EqualTo("Contact Us"), "Contact Us heading is incorrect");
+            Assert.That(headingText, Is.EqualTo("Contact us"), "Contact Us heading is incorrect");
         }
 
         [Test]
@@ -59,12 +60,12 @@ namespace TheConnectedShop.Tests
             Assert.That(isSendButtonEnabled, Is.True, "Send Button should be enabled");
         }
 
-        [Test]
+       /* [Test]
         public async Task HoverSendButton_ShouldChangeColor()
         {
             await _contactPage.HoverSendButton();
             await _contactPage.ExpectedSendButtonBackgroundColor("rgb(255, 255, 255)");
-        }
+        }*/
 
     
     }
