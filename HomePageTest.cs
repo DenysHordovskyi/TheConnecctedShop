@@ -76,37 +76,42 @@
 //             bool isEditable = await searchField.IsEditableAsync();
 //             Assert.That(isEnabled, Is.True, "Search field should be enabled");
 //             Assert.That(isEditable, Is.True, "Search field should be editable");
-
-
-
-
-
-
-
 //             string placeholder = await searchField.GetAttributeAsync("placeholder");
 //             Assert.That(placeholder, Is.Not.Null.And.Not.Empty, "Search field should have placeholder");
 //             Assert.That(placeholder, Is.EqualTo("Search"), "не збігаєтся");
 //             Console.WriteLine($"Placeholder text: {placeholder}");
-
 //             string testSearchText = "smart lock";
 //             await searchField.FillAsync(testSearchText);
-
 //             string actualText = await searchField.InputValueAsync(); //Читає що написано
 //             Assert.That(actualText, Is.EqualTo(testSearchText), $"Expected '{testSearchText}' but got '{actualText}'");
 //         }
+
+
 
 //         [Test]
 //         public async Task SupportPhoneNumberTest()
 //         {
 //             await Expect(_page.GetByRole(AriaRole.Link, new() { Name = "(305) 330-3424" }).First).ToBeVisibleAsync();
 //         }
-
 //         [Test]
 //         public async Task CartTest()
 //         {
 //             var shoppingCart = _page.Locator(".header__cart-inner");
 //             await Expect(shoppingCart).ToBeVisibleAsync();
 //         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //         [Test]
 //         public async Task SearchItemTest()

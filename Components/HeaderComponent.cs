@@ -19,6 +19,7 @@ namespace TheConnectedShop.Components
         private ILocator CartIcon => Page.Locator(".header__icon--cart");
         private ILocator CartCount => Page.Locator(".cart-count-bubble");
         private ILocator AccountIcon => Page.Locator(".header__icon--account");
+        private ILocator SearchItem => Page.Locator(".predictive-search__item__info").First;
         public HeaderComponent(IPage page) : base(page) { }
 
         public async Task<bool> IsLogoVisible()
@@ -125,6 +126,11 @@ namespace TheConnectedShop.Components
             return await SearchField.IsVisibleAsync();
         }
 
+        public async Task<bool> IsSearchFieldEnabled()
+        {
+            return await SearchField.IsEnabledAsync();
+        }
+
         public async Task SetSearchText(string text)
 
         {
@@ -155,9 +161,26 @@ namespace TheConnectedShop.Components
             await SearchField.PressAsync("Enter");
             await WaitForPageLoad();
         }
-         public async Task<string?> GetSearchPlaceholderText()
+
+        public async Task<string?> GetSearchPlaceholderText()
         {
             return await SearchField.GetAttributeAsync("placeholder");
+        }
+
+        public async Task<string> GetFirstSearchResultText()
+        {
+            await Assertions.Expect(SearchItem).ToBeVisibleAsync();
+            return await SearchItem.InnerTextAsync();
+        }
+
+        public async Task ExpectFirstSearchResultVisible()
+        {
+            await Assertions.Expect(SearchItem).ToBeVisibleAsync();
+        }
+
+        public async Task ExpectFirstSearchResultContains(string expected)
+        {
+            await Assertions.Expect(SearchItem).ToContainTextAsync(expected);
         }
 
         public async Task<bool> IsNavigationMenuVisible()
