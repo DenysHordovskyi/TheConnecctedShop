@@ -18,28 +18,28 @@ namespace TheConnectedShop.Components
         private ILocator MainMenuItems => Page.Locator(".header__menu-item");
         private ILocator CartIcon => Page.Locator(".header__icon--cart");
         private ILocator CartCount => Page.Locator(".cart-count-bubble");
-        private ILocator AccountIcon => Page.Locator(".header__icon--account"); 
+        private ILocator AccountIcon => Page.Locator(".header__icon--account");
         public HeaderComponent(IPage page) : base(page) { }
- 
+
         public async Task<bool> IsLogoVisible()
 
         {
             return await LogoLink.IsVisibleAsync() && await LogoImage.IsVisibleAsync();
         }
- 
+
         public async Task ClickLogo()
 
         {
             await LogoLink.ClickAsync();
             await WaitForPageLoad(); //після кліку очікуємо коли загрузится
         }
- 
+
         public async Task<string> GetLogoHref()
 
         {
             return await LogoLink.GetAttributeAsync("href") ?? string.Empty; //перевіряє чи є ссилка
         }
- 
+
         public async Task<(string width, string height)> GetLogoDimensions()
 
         {
@@ -47,32 +47,32 @@ namespace TheConnectedShop.Components
             var height = await LogoImage.GetAttributeAsync("height") ?? string.Empty;
             return (width, height);
         }
-       
+
 
         public async Task<bool> IsPhoneNumberVisible()
 
         {
             return await PhoneNumberLink.IsVisibleAsync();
         }
- 
+
         public async Task<string> GetPhoneNumberText()
 
         {
             return await PhoneNumberLink.TextContentAsync() ?? string.Empty;
         }
- 
+
         public async Task ClickPhoneNumber()
 
         {
             await PhoneNumberLink.ClickAsync();
-        }        
+        }
 
         public async Task<bool> IsCartVisible()
 
         {
             return await ShoppingCart.IsVisibleAsync();
         }
- 
+
         public async Task ClickCart()
 
         {
@@ -82,13 +82,13 @@ namespace TheConnectedShop.Components
             await WaitForPageLoad();
 
         }
- 
+
         public async Task<bool> IsCartIconVisible()
 
         {
             return await CartIcon.IsVisibleAsync();
         }
- 
+
         public async Task<int> GetCartItemCount()
 
         {
@@ -102,7 +102,7 @@ namespace TheConnectedShop.Components
                 }
             }
             return 0;
-        }     
+        }
 
         public async Task ClickContactButton()
 
@@ -110,60 +110,62 @@ namespace TheConnectedShop.Components
             await ContactButton.ClickAsync();
             await WaitForPageLoad();
         }
- 
+
         public async Task<bool> IsContactButtonVisible()
 
         {
             return await ContactButton.IsVisibleAsync();
         }
- 
-       
+
+
 
         public async Task<bool> IsSearchFieldVisible()
 
         {
             return await SearchField.IsVisibleAsync();
         }
- 
+
         public async Task SetSearchText(string text)
 
         {
             await SearchField.FillAsync(text);
         }
- 
+
         public async Task TypeSearchText(string text)
 
         {
             await SearchField.PressSequentiallyAsync(text);
         }
- 
+
         public async Task<string> GetSearchText()
 
         {
             return await SearchField.InputValueAsync();
         }
- 
+
         public async Task ClearSearchField()
 
         {
             await SearchField.ClearAsync();
         }
- 
+
         public async Task SubmitSearch()
 
         {
             await SearchField.PressAsync("Enter");
             await WaitForPageLoad();
         }
- 
-        
+         public async Task<string?> GetSearchPlaceholderText()
+        {
+            return await SearchField.GetAttributeAsync("placeholder");
+        }
 
         public async Task<bool> IsNavigationMenuVisible()
 
         {
             return await NavigationMenu.IsVisibleAsync();
         }
- 
+
         public async Task<List<string>> GetMenuItemsText()
 
         {
@@ -179,7 +181,7 @@ namespace TheConnectedShop.Components
             }
             return items;
         }
- 
+
         public async Task ClickMenuItemByText(string menuText)
 
         {
@@ -191,7 +193,7 @@ namespace TheConnectedShop.Components
                 await WaitForPageLoad();
             }
         }
- 
+
         public async Task ClickMenuItemByIndex(int index)
         {
             if (await MainMenuItems.Nth(index).IsVisibleAsync())
@@ -199,13 +201,13 @@ namespace TheConnectedShop.Components
                 await MainMenuItems.Nth(index).ClickAsync();
                 await WaitForPageLoad();
             }
-        }      
+        }
 
         public async Task<bool> IsAccountIconVisible()
         {
             return await AccountIcon.IsVisibleAsync();
         }
- 
+
         public async Task ClickAccountIcon()
         {
             if (await IsAccountIconVisible())
@@ -214,20 +216,18 @@ namespace TheConnectedShop.Components
                 await WaitForPageLoad();
             }
         }
- 
-       
+
+
 
         public async Task<bool> IsHeaderVisible()
 
         {
-            return await LogoLink.IsVisibleAsync() && 
+            return await LogoLink.IsVisibleAsync() &&
 
                    await NavigationMenu.IsVisibleAsync() &&
 
                    await SearchField.IsVisibleAsync();
         }
- 
-        
 
         public async Task OpenMobileMenu()
         {
@@ -239,4 +239,3 @@ namespace TheConnectedShop.Components
         }
     }
 }
- 

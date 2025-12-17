@@ -60,16 +60,28 @@
 //             string logoAtributeHeight = await logoImage.GetAttributeAsync("height");
 //             Assert.That(logoAtributeHeight, Is.EqualTo("90.0"));
 //         }
+
+
+
+
+
+
+
 //         [Test]
 //         public async Task SearchFieldEnableAndEditableTest()
 //         {
 //             var searchField = _page.Locator("#Search-In-Inline");
 //             await Assertions.Expect(searchField).ToBeVisibleAsync();
-
 //             bool isEnabled = await searchField.IsEnabledAsync();
 //             bool isEditable = await searchField.IsEditableAsync();
 //             Assert.That(isEnabled, Is.True, "Search field should be enabled");
 //             Assert.That(isEditable, Is.True, "Search field should be editable");
+
+
+
+
+
+
 
 //             string placeholder = await searchField.GetAttributeAsync("placeholder");
 //             Assert.That(placeholder, Is.Not.Null.And.Not.Empty, "Search field should have placeholder");

@@ -6,12 +6,10 @@ using TheConnectedShop.Pages;
 namespace TheConnectedShop.Tests
 {
     [TestFixture]
-    public class ContactTest : BaseTest
+    public class ContactTests : BaseTest
     {
 
-        //  private IPlaywright _playwright;
-        //  private IBrowser _browser;
-        //  private IPage _page;
+        
         private HomePage _homePage;
         private ContactPage _contactPage;
 
