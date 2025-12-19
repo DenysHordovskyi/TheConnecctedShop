@@ -20,6 +20,7 @@ namespace TheConnectedShop.Components
         private ILocator CartCount => Page.Locator(".cart-count-bubble");
         private ILocator AccountIcon => Page.Locator(".header__icon--account");
         private ILocator SearchItem => Page.Locator(".predictive-search__item__title").First;
+        private ILocator SuggestionBlock => Page.Locator(".predictive-search__item-heading").First;
         public HeaderComponent(IPage page) : base(page) { }
 
         public async Task<bool> IsLogoVisible()
@@ -167,7 +168,7 @@ namespace TheConnectedShop.Components
             return await SearchField.GetAttributeAsync("placeholder");
         }
 
-        public async Task<string> GetFirstSearchResultResult()
+        public async Task<string> GetFirstSearchResult()
         {
             return (await SearchItem.TextContentAsync())?.Trim()  ?? "";
         }
@@ -177,9 +178,14 @@ namespace TheConnectedShop.Components
             await Assertions.Expect(SearchItem).ToBeVisibleAsync();
         }
 
-        public async Task ExpectFirstSearchResultContains(string expected)
+        public async Task ExpectFirstSearchResultContains(string expected)           //it doesn't use
         {
             await Assertions.Expect(SearchItem).ToContainTextAsync(expected);
+        }
+
+        public async Task ExpectSuggestionBlockVisible()
+        {
+            await Assertions.Expect(SuggestionBlock).ToBeVisibleAsync();
         }
 
         public async Task<bool> IsNavigationMenuVisible()

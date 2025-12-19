@@ -36,7 +36,7 @@ namespace TheConnectedShop.Tests
         }
 
         [Test]
-        public async Task SearchField_DropDownSearchItem_ShouldBeVisible()
+        public async Task SearchField_DropDownSearchItem_ShouldBeVisible()           //not needed
         {
             const string setText = "Smart door";
 
@@ -53,8 +53,19 @@ namespace TheConnectedShop.Tests
             await _headerComponent.TypeSearchText(setText);
             await _headerComponent.ExpectFirstSearchResultVisible();
 
-            var searchResult = await _headerComponent.GetFirstSearchResultResult();
+            var searchResult = await _headerComponent.GetFirstSearchResult();
             Assert.That(searchResult, Does.Contain(setText).IgnoreCase);
+        }
+
+        [Test]
+        public async Task SearchField_SuggestionBlock_ShouldBeVisible()
+        {
+            const string setText = "smart door lock";
+            await _headerComponent.TypeSearchText(setText);
+            await _headerComponent.ExpectSuggestionBlockVisible();
+            
+            var suggestionBlock = _headerComponent.GetFirstSearchResult();
+            Assert.That(suggestionBlock, Does.Contain(setText).IgnoreCase);
         }
     }
 }

@@ -197,6 +197,8 @@
 //             string suggestionBlock = "Suggestions";
 //             Assert.That(blockName, Does.Contain(suggestionBlock));
 
+
+
 //             var firstSuggestionLoc = _page.Locator(".predictive-search__item-heading").First;
 //             var suggestionResult = await firstSuggestionLoc.InnerTextAsync();
 //             string suggestionText = "smart door lock slim";
