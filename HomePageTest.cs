@@ -118,9 +118,10 @@
 //         {
 //             var searchField = _page.Locator("#Search-In-Inline");
 //             await Expect(searchField).ToBeVisibleAsync();
-//             string searchValue = "smart door";
 
+//             string searchValue = "smart door";
 //             await searchField.PressSequentiallyAsync(searchValue);
+
 //             await Task.Delay(3000);
 
 //             var searchItem = _page.Locator(".predictive-search__item__info").First;
@@ -129,7 +130,8 @@
 
 //             Assert.That(resultText.ToLower(), Does.Contain(searchValue)); //ToLower не чутливий до рієстру                                                                          
 //         }
-//         [Test]
+//
+//        [Test]
 //         public async Task SearchUnknownItemTest()
 //         {
 //             var searchField = _page.Locator("#Search-In-Inline");

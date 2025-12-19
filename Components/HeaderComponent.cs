@@ -19,7 +19,7 @@ namespace TheConnectedShop.Components
         private ILocator CartIcon => Page.Locator(".header__icon--cart");
         private ILocator CartCount => Page.Locator(".cart-count-bubble");
         private ILocator AccountIcon => Page.Locator(".header__icon--account");
-        private ILocator SearchItem => Page.Locator(".predictive-search__item__info").First;
+        private ILocator SearchItem => Page.Locator(".predictive-search__item__title").First;
         public HeaderComponent(IPage page) : base(page) { }
 
         public async Task<bool> IsLogoVisible()
@@ -167,10 +167,9 @@ namespace TheConnectedShop.Components
             return await SearchField.GetAttributeAsync("placeholder");
         }
 
-        public async Task<string> GetFirstSearchResultText()
+        public async Task<string> GetFirstSearchResultResult()
         {
-            await Assertions.Expect(SearchItem).ToBeVisibleAsync();
-            return await SearchItem.InnerTextAsync();
+            return (await SearchItem.TextContentAsync())?.Trim()  ?? "";
         }
 
         public async Task ExpectFirstSearchResultVisible()

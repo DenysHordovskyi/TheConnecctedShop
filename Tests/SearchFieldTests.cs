@@ -46,14 +46,15 @@ namespace TheConnectedShop.Tests
         }
 
         [Test]
-        public async Task SearchField_DropDownSearchItem_ShoudContainSearchText()
+        public async Task SearchField_DropDownSearchItem_ShoudContainSearchResalt()
         {
-            const string setText = "smart door";
-            await _headerComponent.TypeSearchText(setText);   
-            await _headerComponent.ExpectFirstSearchResultContains(setText);
+            const string setText = "smart door lock";
 
-            var searchResult = await _headerComponent.GetFirstSearchResultText();
-            Assert.That(searchResult.ToLower(), Does.Contain(setText));
+            await _headerComponent.TypeSearchText(setText);
+            await _headerComponent.ExpectFirstSearchResultVisible();
+
+            var searchResult = await _headerComponent.GetFirstSearchResultResult();
+            Assert.That(searchResult, Does.Contain(setText).IgnoreCase);
         }
     }
 }
