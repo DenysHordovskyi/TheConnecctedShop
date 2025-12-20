@@ -1,4 +1,5 @@
 using Microsoft.Playwright;
+using TheConnectedShop.Utils;
  
 namespace TheConnectedShop.Pages
 
@@ -13,13 +14,13 @@ namespace TheConnectedShop.Pages
         private ILocator PhoneField => Page.GetByLabel("PHONE NUMBER");
         private ILocator CommentField => Page.GetByLabel("COMMENT");
         private ILocator SendButton => Page.Locator("button[type='submit'].button:has(span:text('Send'))").First;        
-        private ILocator ContactLink => Page.Locator("a.header__menu-item[href='/pages/contact-us']");
+        private ILocator ContactLink => Page.Locator("a.header__menu-item[href='/pages/contact-us11']");
         public ContactPage(IPage page) : base(page) { }
  
         // Validation methods
         public async Task ClickContactButton()
         {
-            await ContactLink.ClickAsync();
+            await ContactLink.ClickSafe("Click on Contact Link");
         }        
 
         public async Task<bool> IsContactUsHeadingVisible()
@@ -72,7 +73,7 @@ namespace TheConnectedShop.Pages
         public async Task ClickSendButton()
 
         {
-            await SendButton.ClickAsync();
+            await SendButton.ClickSafe();
         }
  
         public async Task<string> GetContactUsHeadingText()

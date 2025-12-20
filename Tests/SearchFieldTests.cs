@@ -46,7 +46,7 @@ namespace TheConnectedShop.Tests
         }
 
         [Test]
-        public async Task SearchField_DropDownSearchItem_ShoudContainSearchResalt()
+        public async Task SearchField_DropDownSearchItem_ShoudContainSearchResult()
         {
             const string setText = "smart door lock";
 

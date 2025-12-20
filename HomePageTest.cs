@@ -174,7 +174,6 @@
 
 //              Assert.That(suggestionText, Does.Contain(suggestionResult));
 
-//              awa
 
 //              string searchResultPage = "https://theconnectedshop.com/search?q=smart+door+lock+slim&_pos=1&_psq=smart+door&_ss=e&_v=1.0";
 //              string currentUrl = _page.Url;

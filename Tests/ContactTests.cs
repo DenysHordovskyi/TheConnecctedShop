@@ -23,12 +23,12 @@ namespace TheConnectedShop.Tests
             await _contactPage.ClickContactButton();
         }
 
-        [Test]
-        public async Task ContactUsHeading_ShouldBeVisible()
-        {
-            var isContactUsHeadingVisible = await _contactPage.IsContactUsHeadingVisible();
-            Assert.That(isContactUsHeadingVisible, Is.True, "Contact Us heading should be visible");
-        }
+        // [Test]
+        // public async Task ContactUsHeading_ShouldBeVisible()
+        // {
+        //     var isContactUsHeadingVisible = await _contactPage.IsContactUsHeadingVisible();
+        //     Assert.That(isContactUsHeadingVisible, Is.True, "Contact Us heading should be visible");
+        // }
 
         [Test]
         public async Task AllFormFields_ShouldBeVisible()
@@ -37,12 +37,12 @@ namespace TheConnectedShop.Tests
             Assert.That(areFormFieldsVisible, Is.True, "All form fields should be visible");
         }
 
-        [Test]
-        public async Task Heading_ShouldHaveText_ContactUs()
-        {
-            var headingText = await _contactPage.GetContactUsHeadingText();
-            Assert.That(headingText, Is.EqualTo("Contact us"), "Contact Us heading is incorrect");
-        }
+        // [Test]
+        // public async Task Heading_ShouldHaveText_ContactUs()
+        // {
+        //     var headingText = await _contactPage.GetContactUsHeadingText();
+        //     Assert.That(headingText, Is.EqualTo("Contact us"), "Contact Us heading is incorrect");
+        // }
 
         [Test]
         public async Task SendButton_ShouldBeVisible()

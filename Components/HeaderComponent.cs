@@ -245,8 +245,6 @@ namespace TheConnectedShop.Components
             }
         }
 
-
-
         public async Task<bool> IsHeaderVisible()
 
         {
