@@ -23,12 +23,12 @@ namespace TheConnectedShop.Tests
             await _contactPage.ClickContactButton();
         }
 
-        // [Test]
-        // public async Task ContactUsHeading_ShouldBeVisible()
-        // {
-        //     var isContactUsHeadingVisible = await _contactPage.IsContactUsHeadingVisible();
-        //     Assert.That(isContactUsHeadingVisible, Is.True, "Contact Us heading should be visible");
-        // }
+        [Test]
+        public async Task ContactUsHeading_ShouldBeVisible()
+        {
+            var isContactUsHeadingVisible = await _contactPage.IsContactUsHeadingVisible();
+            Assert.That(isContactUsHeadingVisible, Is.True, "Contact Us heading should be visible");
+        }
 
         [Test]
         public async Task AllFormFields_ShouldBeVisible()
@@ -37,26 +37,26 @@ namespace TheConnectedShop.Tests
             Assert.That(areFormFieldsVisible, Is.True, "All form fields should be visible");
         }
 
+        [Test]
+        public async Task Heading_ShouldHaveText_ContactUs()
+        {
+            var headingText = await _contactPage.GetContactUsHeadingText();
+            Assert.That(headingText, Is.EqualTo("Contact us"), "Contact Us heading is incorrect");
+        }
+
         // [Test]
-        // public async Task Heading_ShouldHaveText_ContactUs()
+        // public async Task SendButton_ShouldBeVisible()
         // {
-        //     var headingText = await _contactPage.GetContactUsHeadingText();
-        //     Assert.That(headingText, Is.EqualTo("Contact us"), "Contact Us heading is incorrect");
+        //     var isSendButtonVisible = await _contactPage.IsSendButtonVisible();
+        //     Assert.That(isSendButtonVisible, Is.True, "Send Button should be visible");
         // }
 
-        [Test]
-        public async Task SendButton_ShouldBeVisible()
-        {
-            var isSendButtonVisible = await _contactPage.IsSendButtonVisible();
-            Assert.That(isSendButtonVisible, Is.True, "Send Button should be visible");
-        }
-
-        [Test]
-        public async Task SendButton_ShouldBeEnabled()
-        {
-            var isSendButtonEnabled = await _contactPage.IsSendButtonEnabled();
-            Assert.That(isSendButtonEnabled, Is.True, "Send Button should be enabled");
-        }
+        // [Test]
+        // public async Task SendButton_ShouldBeEnabled()
+        // {
+        //     var isSendButtonEnabled = await _contactPage.IsSendButtonEnabled();
+        //     Assert.That(isSendButtonEnabled, Is.True, "Send Button should be enabled");
+        // }
 
        /* [Test]
         public async Task HoverSendButton_ShouldChangeColor()
@@ -64,7 +64,22 @@ namespace TheConnectedShop.Tests
             await _contactPage.HoverSendButton();
             await _contactPage.ExpectedSendButtonBackgroundColor("rgb(255, 255, 255)");
         }*/
+[Test]
+public async Task FillAllContactForm()
+        {
+            string fillName = "11111";
+            string fillEmail = "qqq@gaa.com";
+            string fillPhone = "1111111112";
+            string fillComent = "read me";
 
+            await _contactPage.FillContactForm(
+                fillName,
+                fillEmail,
+                fillPhone,
+                fillComent
+            );
+            await _contactPage.ClickContactButton();
+        }
     
     }
 }

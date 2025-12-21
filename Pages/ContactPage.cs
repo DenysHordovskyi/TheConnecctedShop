@@ -14,7 +14,7 @@ namespace TheConnectedShop.Pages
         private ILocator PhoneField => Page.GetByLabel("PHONE NUMBER");
         private ILocator CommentField => Page.GetByLabel("COMMENT");
         private ILocator SendButton => Page.Locator("button[type='submit'].button:has(span:text('Send'))").First;        
-        private ILocator ContactLink => Page.Locator("a.header__menu-item[href='/pages/contact-us11']");
+        private ILocator ContactLink => Page.Locator("a.header__menu-item[href='/pages/contact-us']");
         public ContactPage(IPage page) : base(page) { }
  
         // Validation methods
@@ -64,10 +64,10 @@ namespace TheConnectedShop.Pages
         public async Task FillContactForm(string name, string email, string phone, string comment)
 
         {
-            await NameField.FillAsync(name);
-            await EmailField.FillAsync(email);
-            await PhoneField.FillAsync(phone);
-            await CommentField.FillAsync(comment);
+            await NameField.FillSafe(name, "Fill Name");
+            await EmailField.FillSafe(email, "Fill Email");
+            await PhoneField.FillSafe(phone, "Fill Phone");
+            await CommentField.FillSafe(comment, "Fill Comment");
         }
  
         public async Task ClickSendButton()
@@ -84,3 +84,7 @@ namespace TheConnectedShop.Pages
     }
 }
  
+//  var headingText =
+//     await ContactUsHeading.GetTextSafe("Contact Us heading");
+ 
+// Assert.AreEqual("Contact Us", headingText);

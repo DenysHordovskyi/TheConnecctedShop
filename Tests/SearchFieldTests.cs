@@ -64,7 +64,7 @@ namespace TheConnectedShop.Tests
             await _headerComponent.TypeSearchText(setText);
             await _headerComponent.ExpectSuggestionBlockVisible();
             
-            var suggestionBlock = _headerComponent.GetFirstSearchResult();
+            var suggestionBlock = await _headerComponent.GetFirstSuggestion();
             Assert.That(suggestionBlock, Does.Contain(setText).IgnoreCase);
         }
     }

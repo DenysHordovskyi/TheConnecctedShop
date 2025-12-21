@@ -263,5 +263,9 @@ namespace TheConnectedShop.Components
                 await mobileMenuButton.ClickAsync();
             }
         }
+        public async Task<string> GetFirstSuggestion()
+        {
+            return (await SuggestionBlock.TextContentAsync())?.Trim()  ?? "";
+        }
     }
 }
